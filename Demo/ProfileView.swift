@@ -118,7 +118,7 @@ struct ProfileView: View {
                self.profile.lastName = self.lastName
                self.profile.email = self.email
 
-               if self.profile.persistentModelID.storeIdentifier == nil {
+               if !self.profile.isPersisted {
                   self.modelContext.insert(self.profile)
                }
 
