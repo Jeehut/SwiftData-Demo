@@ -20,32 +20,32 @@ struct ProfileView: View {
    let selectableSymbolNames: [String] = ["person", "building.2"]
 
    @State
-   var name: String = ""
+   var name: String
 
    @State
-   var symbolName: String = ""
+   var symbolName: String
 
    // Contact Info
    @State
-   var firstName: String = ""
+   var firstName: String
 
    @State
-   var lastName: String = ""
+   var lastName: String
 
    @State
-   var email: String = ""
+   var email: String
 
    @FocusState
    var focusedField: Field?
 
    init(profile: Profile) {
       self.profile = profile
-      self.name = profile.name
-      self.symbolName = profile.symbolName
+       self._name = State(wrappedValue:  profile.name)
+       self._symbolName = State(wrappedValue:profile.symbolName)
 
-      if let firstName = profile.firstName { self.firstName = firstName }
-      if let lastName = profile.lastName { self.lastName = lastName }
-      if let email = profile.email { self.email = email }
+       self._firstName = State(wrappedValue: profile.firstName ?? "")
+       self._lastName = State(wrappedValue: profile.lastName ?? "")
+       self._email = State(wrappedValue: profile.email ?? "")
    }
 
    var body: some View {

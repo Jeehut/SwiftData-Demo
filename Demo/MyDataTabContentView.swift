@@ -43,13 +43,13 @@ struct MyDataTabContentView: View {
                }
 
                Button {
-                  self.showNewProfile = true
+                   selectedProfile = .init(name: "", symbolName: "")
                } label: {
                   Label("New profile", systemImage: "plus")
                }
-               .sheet(isPresented: self.$showNewProfile) {
+               .sheet(item:$selectedProfile) { profile in
                   NavigationStack {
-                     ProfileView(profile: Profile(name: "", symbolName: ""))
+                     ProfileView(profile: profile)
                         .toolbar {
                            ToolbarItem(placement: .cancellationAction) {
                               Button("Cancel") {
