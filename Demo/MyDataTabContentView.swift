@@ -49,7 +49,7 @@ struct MyDataTabContentView: View {
                }
                .sheet(isPresented: self.$showNewProfile) {
                   NavigationStack {
-                     ProfileView(profile: Profile(name: "", symbolName: ""), isNew: true)
+                     ProfileView(profile: Profile(name: "", symbolName: ""))
                         .toolbar {
                            ToolbarItem(placement: .cancellationAction) {
                               Button("Cancel") {
@@ -66,7 +66,7 @@ struct MyDataTabContentView: View {
             }
          }
          .navigationDestination(for: Profile.self) { profile in
-            ProfileView(profile: profile, isNew: false)
+            ProfileView(profile: profile)
          }
          .navigationTitle("My Data")
       }
