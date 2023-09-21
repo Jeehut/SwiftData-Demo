@@ -22,6 +22,7 @@ let modelContainer: ModelContainer = {
 
 @main
 struct ContabankApp: App {
+   let container = modelContainer
    var body: some Scene {
       WindowGroup {
          MyDataTabContentView()
