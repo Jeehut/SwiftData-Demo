@@ -9,6 +9,7 @@ struct ProfileView: View {
    }
 
    let profile: Profile
+   let isNew: Bool
 
    @Environment(\.dismiss)
    var dismiss
@@ -38,8 +39,9 @@ struct ProfileView: View {
    @FocusState
    var focusedField: Field?
 
-   init(profile: Profile) {
+   init(profile: Profile, isNew: Bool) {
       self.profile = profile
+      self.isNew = isNew
       self.name = profile.name
       self.symbolName = profile.symbolName
 
@@ -118,6 +120,10 @@ struct ProfileView: View {
                self.profile.lastName = self.lastName
                self.profile.email = self.email
 
+               if self.isNew {
+                  self.modelContext.insert(self.profile)
+               }
+
                do {
                   try self.modelContext.save()
                } catch {
@@ -134,7 +140,7 @@ struct ProfileView: View {
    NavigationStack {
       Color.gray
          .navigationDestination(isPresented: .constant(true)) {
-            ProfileView(profile: Profile(name: "Personal", symbolName: "person"))
+            ProfileView(profile: Profile(name: "Personal", symbolName: "person"), isNew: false)
          }
    }
 }
@@ -143,7 +149,7 @@ struct ProfileView: View {
    Color.gray
       .sheet(isPresented: .constant(true)) {
          NavigationStack {
-            ProfileView(profile: Profile(name: "", symbolName: ""))
+            ProfileView(profile: Profile(name: "", symbolName: ""), isNew: true)
                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") {} } }
          }
       }
