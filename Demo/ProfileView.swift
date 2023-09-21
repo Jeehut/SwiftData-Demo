@@ -87,6 +87,21 @@ struct ProfileView: View {
                   .foregroundStyle(Color.accentColor)
                   .textContentType(.familyName)
                   .focused(self.$focusedField, equals: .lastName)
+                  .submitLabel(.next)
+                  .onSubmit {
+                     self.focusedField = .email
+                  }
+            }
+            .labeledContentStyle(.vertical())
+         }
+
+         Section("Reachability") {
+            LabeledContent("Email") {
+               TextField("e.g. jane@roe.com", text: self.$email)
+                  .foregroundStyle(Color.accentColor)
+                  .textContentType(.emailAddress)
+                  .focused(self.$focusedField, equals: .email)
+                  .submitLabel(.done)
             }
             .labeledContentStyle(.vertical())
          }
